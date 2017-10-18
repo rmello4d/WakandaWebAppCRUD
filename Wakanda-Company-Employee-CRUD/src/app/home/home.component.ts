@@ -1,0 +1,1 @@
+import { Component, OnInit } from '@angular/core';import { AuthenticationService } from '../authentication.service'@Component({  selector: 'my-home',  templateUrl: './home.component.html',  styleUrls: ['./home.component.scss'],  providers: [AuthenticationService]})export class HomeComponent implements OnInit {	constructor() {}	ngOnInit() {  }}

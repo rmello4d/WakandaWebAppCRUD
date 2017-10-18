@@ -1,0 +1,79 @@
+<app-header> </app-header>
+<section class="content no-heading">
+<mat-spinner *ngIf="loading" [color]="'accent'"></mat-spinner>
+  <div class="container">
+    <div class="row">
+      <div class="dash-tab col s12">
+        <div class="card-item tab-content">
+            <div class="row">
+              <div class="col s12">
+                <div class="user-prof m-media">
+                  <form #employeeForm="ngForm" name="employeeForm">
+                    <div class="col s4">
+                      <div class="employee-image">
+                        <img [src]="employee.photo?.uri" onError="this.src='assets/default-avatar.jpg'">
+                      </div>
+                    </div>
+                    <div class="employee-info col s8">
+                      <div class="col s10">
+                        <label for="lname">Last Name</label>
+                        <input [(ngModel)]="employee.lastName" type="text" name="lname" placeholder="Last name" required>
+                      </div>
+                      <div class="col s10">
+                          <label for="fname">First Name</label>
+                          <input [(ngModel)]="employee.firstName" type="text" name="fname" required>
+                      </div>
+                      <div class="col s10">
+                          <label for="birthDate">Birth Date</label>
+                          <input [(ngModel)]="employee.birthDate" name="birthDate" placeholder="Birth Date" (click)="datepicker.open()" [matDatepicker]="datepicker">
+                          <mat-datepicker #datepicker>
+                            <mat-datepicker-toggle [for]="datepicker" class="col s2"></mat-datepicker-toggle>
+                          </mat-datepicker>
+                      </div>
+
+                      <div class="col s10">
+                        <label for="title">Title</label>
+                        <input [(ngModel)]="employee.title" type="text" name="title" placeholder="Title" required>
+                      </div>
+                      <div class="col s10">
+                        <label for="age">Age</label>
+                        <input [(ngModel)]="employee.age" type="text" name="age" placeholder="Age" [readOnly]="true">
+                      </div>
+                      <div class="col s10">
+                        <label for="salary">Salary</label>
+                        <input [(ngModel)]="employee.salary" type="text" name="salary" placeholder="Salary" required>
+                      </div>
+                      <div class="col s10">
+                        <label for="country">Country</label>
+                        <input [(ngModel)]="employee.country" type="text" name="country" placeholder="Country" [readOnly]="true">
+                      </div>
+                      <div class="col s10">
+                        <label for="companyName">Company</label>
+                        <input [(ngModel)]="employee.companyName" type="text" name="companyName" placeholder="Company Name" [readOnly]="true">
+                      </div>
+                      <div *ngIf="employee.manager" class="col s10">
+                        <label for="managerName">Manager</label>
+                        <input [(ngModel)]="employee.manager.fullName" type="text" name="managerName" placeholder="Manager Name" [readOnly]="true">
+                      </div>
+
+                    </div>
+                    <div class="separator"></div>
+                    <div class="col s4">
+                    </div>
+                    <div class="col s8">
+                      <button class="btn btn-medium" (click)="openDeleteDialog(employee)">Delete</button>
+                      <button class="btn btn-medium" [disabled]="employeeForm.invalid && (employeeForm.dirty || employeeForm.touched)" (click)="editEmployee(employee)">Save</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+

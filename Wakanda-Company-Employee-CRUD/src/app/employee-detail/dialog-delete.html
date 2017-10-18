@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Delete Employee</h2>
+<mat-dialog-content>
+  Are you sure?
+</mat-dialog-content>
+<mat-dialog-actions>
+<div class="col s8">
+  <button class="btn btn-medium" [mat-dialog-close]="null">No</button>
+  <button class="btn btn-medium" [mat-dialog-close]="employeeToDelete">Yes</button>
+</div>
+</mat-dialog-actions>

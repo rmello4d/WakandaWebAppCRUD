@@ -1,0 +1,49 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+/*
+** DASH TABLE
+*/
+.dash-table thead{
+  color: #c21a2a;
+  font-weight: bold;
+}
+.dash-table>tbody>tr:hover,
+.dash-table>tbody>tr:active,
+.dash-table>tbody>tr:focus,
+.dash-table>tbody>tr.selected {
+  background: #ffa060;
+  color: #fff;
+}
+.dash-table>tbody>tr>td>img {
+  border-radius: 100%;
+  display: inline-block;
+  float: left;
+  width: 40px;
+  height: 50px;
+  margin: 0 8px 0 0;
+}
+.dash-table.img-table>tbody>tr>td {
+  height:      50px;
+  line-height: 50px;
+}
+tbody>tr{
+  cursor: pointer;
+}
+.table>tbody>tr>td {
+    border-top: 1px solid #ddd;
+}
+
+/*
+** input label
+*/
+
+label {
+  float: left;
+}
+
+/*
+** spinner
+*/
+.mat-spinner {
+  margin: 0 auto;
+}
