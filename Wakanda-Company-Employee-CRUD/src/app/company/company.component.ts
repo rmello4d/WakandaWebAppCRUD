@@ -12,6 +12,7 @@ export class CompanyComponent implements OnInit {
   companies: any;
   errorMsg: any;
   loading: boolean;
+  queryString: string;
 
   // pagination
   total: number;
@@ -26,7 +27,7 @@ export class CompanyComponent implements OnInit {
 
   getCompaniesPage(page: number) {
     this.loading = true;
-    this.companyService.getCompanies(page).then((companies) => {
+    this.companyService.getCompanies(page, this.queryString).then((companies) => {
       this.loading = false;
       this.companies = companies.items;
       this.total = companies.total;

@@ -12,9 +12,9 @@ export class CompanyService {
 
   }
 
-  getCompanies(page): Promise<any> {
+  getCompanies(page, queryString): Promise<any> {
     return new Promise((resolve, reject) => {
-      if(this.companiesCollection) {
+      if(page > 1) {
         let start = ((page - 1) * this.pageSize) - this.pageSize; //get to the right start
         this.companiesCollection._first = start;
 
@@ -22,8 +22,13 @@ export class CompanyService {
           resolve(this.extractData(this.companiesCollection));
         });
       } else {
+        let query = {pageSize: this.pageSize, select: 'employees'};
+        if(queryString) {
+          query['filter'] = 'name == :1 OR countryName == :1 OR managerName == :1';
+          query['params'] = [`*${queryString}*`];
+        }
         this.wakanda.getCatalog().then(ds => {
-          ds['Company'].query({pageSize: this.pageSize, select: 'employees'}).then(res => {
+          ds['Company'].query(query).then(res => {
             this.companiesCollection = res;
             resolve(this.extractData(res));
           }).catch((error) => {
@@ -38,6 +43,7 @@ export class CompanyService {
     let entities = collection['entities'];
     let items = entities.map((obj) => {
       let company: any = {};
+      company.ID = obj.ID;
       company.employees = obj.employees.entities.length;
       company.name = obj.name;
       company.countryName = obj.countryName;

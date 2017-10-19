@@ -1,1 +1,49 @@
-<h3>  Companies</h3><mat-spinner *ngIf="loading" [color]="'accent'"></mat-spinner><section class="content no-heading">  <div class="container">    <div class="row">      <div class="col-md-4">        <div class="search-nav">          <input [(ngModel)]="queryString" type="text" class="search" placeholder="Type your search here">          <span></span>        </div>      </div>      <div class="col-md-4">      </div>      <div class="col-md-4">      </div>    </div>    <!-- TABLE -->    <div class="row">      <div class="col-md-12">        <div class="card-item wow fadeInUp" data-wow-delay="1s">          <table class="dash-table table striped">            <thead>              <tr>                <th>Name</th>                <th>Country</th>                <th>Manager</th>                <th>Employees</th>              </tr>            </thead>            <tbody>              <tr *ngFor="let company of (companies | FilterPipe: queryString) | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: total }" [routerLink]="['/employeesCompany', company.name]">                <td>{{company.name}}</td>                <td>{{company.countryName}}</td>                <td>{{company.managerName}}</td>                <td>{{company.employees}}</td>              </tr>            </tbody>          </table>          <div class="paging-div">            <pagination-controls (pageChange)="getCompaniesPage($event)"></pagination-controls>          </div>      </div>    </div>  </div></div></section>
+<h3>
+  Companies
+</h3>
+<mat-spinner *ngIf="loading" [color]="'accent'"></mat-spinner>
+<section class="content no-heading">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="search-nav">
+          <input [(ngModel)]="queryString" (ngModelChange)="getCompaniesPage(1)" type="text" class="search" placeholder="Type your search here">
+          <span></span>
+        </div>
+      </div>
+      <div class="col-md-4">
+      </div>
+      <div class="col-md-4">
+
+      </div>
+    </div>
+    <!-- TABLE -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card-item wow fadeInUp" data-wow-delay="1s">
+          <table class="dash-table table striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Country</th>
+                <th>Manager</th>
+                <th>Employees</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let company of companies | paginate: { itemsPerPage: pageSize, currentPage: p, totalItems: total }" [routerLink]="['/companies', company.ID, 'employees']" [queryParams]="{page: 1}">
+                <td>{{company.name}}</td>
+                <td>{{company.countryName}}</td>
+                <td>{{company.managerName}}</td>
+                <td>{{company.employees}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="paging-div">
+            <pagination-controls (pageChange)="getCompaniesPage($event)"></pagination-controls>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>

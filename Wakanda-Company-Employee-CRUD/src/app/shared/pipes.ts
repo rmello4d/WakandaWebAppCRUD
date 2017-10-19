@@ -3,6 +3,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
     name: 'FilterPipe',
 })
+/**
+* we can use this as client side filter
+*/
 export class FilterPipe implements PipeTransform {
   transform(array: any, qInput: any) {
     if (qInput) {
